@@ -1,0 +1,48 @@
+const ztext = document.querySelector('input');
+const add = document.querySelector('button');
+let text = ''                                                
+
+ztext.addEventListener('change', function (e) {             
+    text = e.target.value;                                   
+})
+    add.addEventListener('click', function () {              
+
+        var btnComplete = document.createElement('button');  
+        btnComplete.innerHTML = "complete";                  
+        btnComplete.classList.add('btn-complete');           
+
+        var btnDelete = document.createElement('button');    
+        btnDelete.innerHTML = "Delete";                     
+        btnDelete.classList.add('btn-delete');               
+
+        var toDo = document.createElement('h1');            
+        toDo.innerText = text;                               
+
+        var container = document.createElement('div');       
+        container.appendChild(btnComplete);               
+        container.appendChild(btnDelete);                    
+        container.appendChild(toDo);                         
+        container.classList.add('todo');                     
+
+        var main = document.querySelector('main');         
+        main.appendChild(container);   
+
+        document.querySelector('.zone-text').value = '';    
+
+
+        btnComplete.addEventListener("click", function () {  
+            if (btnComplete.innerHTML === "complete") {    
+                btnComplete.innerHTML = "Undo";                  
+                toDo.style.textDecoration = 'line-through'; 
+            }
+            else if (btnComplete.innerHTML === "Undo") {   
+                btnComplete.innerHTML = "complete";          
+                toDo.style.textDecoration = 'none';          
+            }
+        }) 
+        btnDelete.addEventListener('click', function () {    
+            btnComplete.remove();                           
+            btnDelete.remove();                             
+            toDo.remove();                                  
+        })
+    })
